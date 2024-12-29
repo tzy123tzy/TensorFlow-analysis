@@ -1,8 +1,12 @@
-import contributors_analyse as ca
+import analyse_contributors as ac
+import analyse_releases as ar
 
 
 def main():
-    ca.show_contributors()
+    owner = 'tensorflow'
+    repo = 'tensorflow'
+    ac.analyse_contributors(owner, repo)
+    ar.analyse_releases(owner, repo)
 
 
 if __name__ == '__main__':
