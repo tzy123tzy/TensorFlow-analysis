@@ -45,7 +45,7 @@ def show_contributors():
     contributor_stats.sort(key=lambda x: x[1], reverse=True)
     
     # 保存为CSV文件
-    with open('contributors.csv', 'w', newline='', encoding='utf-8') as csvfile:
+    with open('Result/contributors.csv', 'w', newline='', encoding='utf-8') as csvfile:
         fieldnames = ['login_name', 'contributions']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
