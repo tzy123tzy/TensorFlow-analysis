@@ -43,12 +43,16 @@ def show_contributors():
 
     # 按贡献次数降序排序
     contributor_stats.sort(key=lambda x: x[1], reverse=True)
-
-    # 输出结果
-    print(f'总贡献者数: {len(contributor_stats)}')
-    for login, contributions in contributor_stats:
-        print(f'{login}: {contributions} 次贡献')
-
+    
+    # 保存为CSV文件
+    with open('contributors.csv', 'w', newline='', encoding='utf-8') as csvfile:
+        fieldnames = ['login_name', 'contributions']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+        for login, contributions in contributor_stats:
+            writer.writerow({'login_name': login, 'contributions': contributions})   
+    
+    # 绘制贡献次数前20的账号
     top_n = 20
     top_contributors = contributor_stats[:top_n]
     names = [contrib[0] for contrib in top_contributors]
