@@ -7,6 +7,7 @@ def main():
     repo = 'tensorflow'
     ac.analyse_contributors(owner, repo)
     ar.analyse_releases(owner, repo)
+    print("new Push")
 
 
 if __name__ == '__main__':
