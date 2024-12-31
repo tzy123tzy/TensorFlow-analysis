@@ -3,10 +3,12 @@ from collections import defaultdict
 from datetime import datetime
 import matplotlib.pyplot as plt
 import get_info as get
+import os
 
 
 # 保存到 CSV 文件
 def save_releases_to_csv(releases):
+    os.makedirs('Result', exist_ok=True)
     with open('Result/tensorflow_releases.csv', 'w', newline='', encoding='utf-8') as csvfile:
         fieldnames = ['tag_name', 'published_at', 'name', 'body']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
@@ -22,6 +24,7 @@ def save_releases_to_csv(releases):
 
 # 统计每年的发布版本数
 def plot_release_timeline(releases):
+    os.makedirs('Result', exist_ok=True)
     year_count = defaultdict(int)
     for release in releases:
         date = datetime.strptime(release['published_at'], '%Y-%m-%dT%H:%M:%SZ')
@@ -53,8 +56,12 @@ def analyse_releases(owner, repo):
     releases = get.get_info(url)
     if not releases:
         print('没有找到发布信息。')
-        return
+        return None, None
 
+    csv_path = 'Result/tensorflow_releases.csv'
     save_releases_to_csv(releases)
 
+    plot_path = 'Result/release_timeline.png'
     plot_release_timeline(releases)
+
+    return csv_path, plot_path
