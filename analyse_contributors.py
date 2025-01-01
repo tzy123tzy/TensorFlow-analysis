@@ -1,10 +1,12 @@
 from matplotlib import pyplot as plt
 import csv
 import get_info as get
+import os
 
 
 # 保存为CSV文件
 def save_contributors_to_csv(contributor_stats):
+    os.makedirs('Result', exist_ok=True)
     with open('Result/contributors.csv', 'w', newline='', encoding='utf-8') as csvfile:
         fieldnames = ['login_name', 'contributions']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
@@ -15,6 +17,7 @@ def save_contributors_to_csv(contributor_stats):
 
 # 绘制贡献次数前20的账号
 def plot_top20_contributions(contributor_stats, owner, repo):
+    os.makedirs('Result', exist_ok=True)
     top_n = 20
     top_contributors = contributor_stats[:top_n]
     names = [contrib[0] for contrib in top_contributors]
@@ -37,7 +40,7 @@ def analyse_contributors(owner, repo):
 
     if not contributors:
         print('没有贡献者数据。')
-        return
+        return None, None
 
     # 统计贡献次数
     contributor_stats = []
@@ -49,6 +52,10 @@ def analyse_contributors(owner, repo):
     # 按贡献次数降序排序
     contributor_stats.sort(key=lambda x: x[1], reverse=True)
 
+    csv_path = 'Result/contributors.csv'
     save_contributors_to_csv(contributor_stats)
 
+    plot_path = 'Result/top20_contributors.png'
     plot_top20_contributions(contributor_stats, owner, repo)
+
+    return csv_path, plot_path
