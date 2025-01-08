@@ -12,9 +12,9 @@ def analyse():
     try:
         current_time = datetime.datetime.now().strftime("%H:%M:%S")
         if selected_analysis == "Analyse Releases":
-            csv_path, plot_path = ar.analyse_releases(owner, repo)
+            csv_path, plot_path,plot_patht , future_releases= ar.analyse_releases(owner, repo)
             result_text.insert(tk.END,
-                               f"{current_time}:\nCSV文件保存路径: {csv_path}\n图表保存路径: {plot_path}\n\n")
+                               f"{current_time}:\nCSV文件保存路径: {csv_path}\n图表保存路径: {plot_path}\n图表保存路径:{plot_patht} 未来五次预测分布时间：{future_releases}\n")
         elif selected_analysis == "Analyse Contributors":
             csv_path, plot_path = ac.analyse_contributors(owner, repo)
             result_text.insert(tk.END,
