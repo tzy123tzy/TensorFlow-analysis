@@ -26,7 +26,7 @@ def analyse():
 
 root = tk.Tk()
 root.title("TensorFlow Analysis GUI")
-root.geometry("400x200")
+root.geometry("600x400")
 
 analysis_type = tk.StringVar()
 analysis_type.set("Analyse Releases")
