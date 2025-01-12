@@ -3,6 +3,7 @@ from tkinter import ttk
 import analyse_releases as ar
 import analyse_contributors as ac
 import datetime
+import bug_wordscloud as bw
 
 
 def analyse():
@@ -19,6 +20,9 @@ def analyse():
             csv_path, plot_path = ac.analyse_contributors(owner, repo)
             result_text.insert(tk.END,
                                f"{current_time}:\nCSV文件保存路径: {csv_path}\n图表保存路径: {plot_path}\n\n")
+        elif selected_analysis == "Analyse WordsCloud":
+            plot_path = bw.analyse_wordsCloud()
+            result_text.insert(tk.END,f"{current_time}:\n文件保存路径: {plot_path}")
     except Exception as e:
         current_time = datetime.datetime.now().strftime("%H:%M:%S")
         result_text.insert(tk.END, f"{current_time}\n:错误信息：{str(e)}\n\n")
@@ -31,7 +35,7 @@ root.geometry("600x400")
 analysis_type = tk.StringVar()
 analysis_type.set("Analyse Releases")
 tk.Label(root, text="Analysis Type:").pack()
-analysis_menu = ttk.Combobox(root, textvariable=analysis_type, values=["Analyse Releases", "Analyse Contributors"])
+analysis_menu = ttk.Combobox(root, textvariable=analysis_type, values=["Analyse Releases", "Analyse Contributors", "Analyse WordsCloud"])
 analysis_menu.pack()
 
 analyse_button = tk.Button(root, text="Analyse", command=analyse)
