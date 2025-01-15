@@ -8,7 +8,6 @@ import os
 import pandas as pd
 from prophet import Prophet
 
-# 假设 get_info.py 文件已经定义了 get_info 函数
 import get_info
 
 
