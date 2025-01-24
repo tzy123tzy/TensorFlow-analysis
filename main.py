@@ -18,7 +18,7 @@ def analyse():
         elif selected_analysis == "Analyse Contributors":
             csv_path, plot_path,total_contributors,max_contributor= ac.analyse_contributors(owner, repo)
             result_text.insert(tk.END,
-                               f"{current_time}:\nCSV文件保存路径: {csv_path}\n图表保存路径: {plot_path}\n\n一共有{total_contributors}个贡献者\n贡献次数最多的是{max_contributor}\n")
+                               f"{current_time}:\nCSV文件保存路径: {csv_path}\n图表保存路径: {plot_path}\n\n")
         elif selected_analysis == "Analyse Bug Words":
             plot_path= bw.generate_bug_wordcloud(owner, repo)
             result_text.insert(tk.END,
